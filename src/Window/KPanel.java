@@ -7,6 +7,7 @@ package Window;
 
 import Map.PhysicalMap;
 import Player.Player;
+import Player.Skill.BasicAttack;
 import static Window.KFrame.WINDOW_HEIGHT;
 import static Window.KFrame.WINDOW_WIDTH;
 import java.awt.Color;
@@ -56,5 +57,9 @@ public class KPanel extends JPanel{
         map.render_decorate(g2);
         player.render(g2);
         map.render_object(g2);
+        
+    }
+    public void reload(){
+        player.reload();
     }
 }

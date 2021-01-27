@@ -13,19 +13,22 @@ import java.awt.Image;
  *
  * @author Kirrnguyen
  */
-public class PlayerRun extends AnimationInterface{
+public class PlayerAttack extends AnimationInterface{
     String[] assets_array = {
-        "ninja_03",
-        "ninja_04",
-        "ninja_05",
-        "ninja_06",
-        "ninja_07",
+        "attack_01",
+        "attack_02",
+        "attack_03",
+        "attack_04",
+        "attack_05",
+        "attack_06",
+        "attack_07",
+        "attack_08",
     };
     Image image;
     int frame = 0;
-    int delay = 25;
+    int delay = 15;
     long time = 0; // update animation
-    public PlayerRun(){
+    public PlayerAttack(){
         super();
     }
     public void update(int direction){
@@ -56,6 +59,4 @@ public class PlayerRun extends AnimationInterface{
     public void setTime(long time_run) {
         this.time = time_run;
     }
-
-    
 }

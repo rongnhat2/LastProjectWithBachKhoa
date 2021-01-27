@@ -62,5 +62,9 @@ public class PlayerInterface {
     public void setY(double y) {
         this.y = y;
     }
+
+    public int getDirection() {
+        return direction;
+    }
     
 }

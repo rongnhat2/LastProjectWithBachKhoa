@@ -5,8 +5,10 @@
  */
 package Player;
 
+import Animation.PlayerAttack;
 import Animation.PlayerRun;
 import Animation.PlayerStand;
+import Player.Skill.BasicAttack;
 import static Window.KPanel.PanelHeight;
 import static Window.KPanel.PanelWidth;
 import static Window.KPanel.map;
@@ -24,8 +26,12 @@ public class Player extends PlayerInterface{
     private boolean botLeft;
     private boolean botRight;
     public boolean isRunning;
+    public boolean isAttack;
+    public static BasicAttack attack;
     public PlayerRun pr;
     public PlayerStand ps;
+    public PlayerAttack pa;
+    public int vector = 1;
     int tx,ty;
     public Player(){
         super();
@@ -34,8 +40,11 @@ public class Player extends PlayerInterface{
         this.width  = 24;
         this.height = 24;
         this.speed  = 3;
+        this.direction = 1;
         pr = new PlayerRun();
         ps = new PlayerStand();
+        pa = new PlayerAttack();
+        attack  = new BasicAttack();
     }
     
     public void calculate(double x,double y){
@@ -54,20 +63,26 @@ public class Player extends PlayerInterface{
         // di chuyển
         if(right){
             dx = speed;
-            pr.update(2);
+            vector = 1;
+            direction = 2;
+            pr.update(vector);
         }else if(left){
             dx = -speed;
-            pr.update(4);
+            vector = 2;
+            direction = 4;
+            pr.update(vector);
         } else if(up){
             dy = -speed;
-            pr.update(1);
+            direction = 1;
+            pr.update(vector);
         } else if(down){
             dy = speed;
-            pr.update(3);
+            direction = 3;
+            pr.update(vector);
         } else {
             dy = 0;
             dx = 0;
-            ps.update(3);
+            ps.update(vector);
         }
         
         //////////kiem tra va cham map
@@ -127,6 +142,8 @@ public class Player extends PlayerInterface{
         map.setxMap((int) (PanelWidth/2 - x));
         map.setyMap((int) (PanelHeight/2 - y));
         ////////////
+        pa.update(vector);
+        attack.update(vector);
     }
     
     @Override
@@ -138,15 +155,22 @@ public class Player extends PlayerInterface{
         ty = map.yMap;
         if (isRunning) {
             pr.render(g2, (int) (tx+x-width/2), (int) (ty+y-height/2));
+        }else if (isAttack) {
+            pa.render(g2, (int) (tx+x-width/2), (int) (ty+y-height/2));
         }else{
             ps.render(g2, (int) (tx+x-width/2), (int) (ty+y-height/2));
         }
+        
+        attack.render(g2);
         g2.drawRect(
                 (int) (tx+x-width/2),
                 (int) (ty+y-height/2), 
                 width, height);
     }
     
+    public void reload(){
+        attack.reload();
+    }
     public void setUp(boolean up) {
         this.up = up;
     }
@@ -163,6 +187,16 @@ public class Player extends PlayerInterface{
         this.right = right;
     }
 
+    public boolean isIsAttack() {
+        return isAttack;
+    }
+
+    public void setIsAttack(boolean isAttack) {
+        this.isAttack = isAttack;
+    }
+
+
+    
     public boolean isIsRunning() {
         return isRunning;
     }

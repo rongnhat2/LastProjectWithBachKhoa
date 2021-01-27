@@ -45,6 +45,7 @@ public class GameLoop extends JPanel implements Runnable{
             kpanel.update();
             kpanel.render();
             kpanel.draw();
+            kpanel.reload();
             
             // END
             // repaint theo FPS 

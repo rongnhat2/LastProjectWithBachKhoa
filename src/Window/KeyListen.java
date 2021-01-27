@@ -5,6 +5,7 @@
  */
 package Window;
 
+import static Player.Player.attack;
 import static Window.KPanel.player;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -44,6 +45,15 @@ public class KeyListen implements KeyListener{
                 player.pr.setTime(System.currentTimeMillis());
                 player.setIsRunning(true);
                 break;
+            case KeyEvent.VK_A:
+                attack.atking = true;
+                if(attack.atking){
+                    player.pa.setTime(System.currentTimeMillis());
+                    player.setIsAttack(true);
+                    attack.setCurrent_time(System.currentTimeMillis());
+                    attack.atking = false;
+                }
+                break;
             default:
                 break;
         }
@@ -68,6 +78,9 @@ public class KeyListen implements KeyListener{
             case KeyEvent.VK_DOWN:
                 player.setDown(false);
                 player.setIsRunning(false);
+                break;
+            case KeyEvent.VK_A:
+                player.setIsAttack(false);
                 break;
             default:
                 break;

@@ -86,11 +86,6 @@ public class PhysicalMap {
         for(int i = 0;i<50;i++){
             for(int j = 0; j < 29 ; j++){
                 g2.drawImage(i26,xMap+ i*24,yMap+ j*24, null);
-//                    if(map1[j][i] == 100){
-//                        g2.drawImage(i26,xMap+ i*24,yMap+ j*24, null);
-//                    }else if(map1[j][i] == 99){
-//                        g2.drawImage(i26,xMap+ i*24,yMap+ j*24, null);
-//                    }
             }
         }
     }
@@ -138,6 +133,8 @@ public class PhysicalMap {
                     g2.drawImage(i24,xMap+ i*24,yMap+ j*24, null);
                 }else if(map1[j][i] == 34){
                     g2.drawImage(i25,xMap+ i*24,yMap+ j*24, null);
+                }else if(map1[j][i] == 2){
+                    g2.drawImage(i2,xMap+ i*24,yMap+ j*24, null);
                 }
                 g2.drawRect(xMap+ i*24,yMap+ j*24, 24, 24);
             }
@@ -165,8 +162,6 @@ public class PhysicalMap {
                     g2.drawImage(i8,xMap+ i*24,yMap+ j*24, null);
                 }else if(map1[j][i] == 13){
                     g2.drawImage(i19,xMap+ i*24+ 12 - i19.getWidth(null)/2,yMap+ j*24 + 24 - i19.getHeight(null), null);
-                }else if(map1[j][i] == 2){
-                    g2.drawImage(i2,xMap+ i*24,yMap+ j*24, null);
                 }
             }
         }

@@ -15,6 +15,7 @@ import java.awt.Image;
 public class PlayerStand extends AnimationInterface{
     String[] assets_array = {
         "ninja_01",
+        "ninja_02",
     };
     Image image;
     public PlayerStand(){
@@ -24,7 +25,7 @@ public class PlayerStand extends AnimationInterface{
     public void update(int direction){
         if (direction == 2) {
             image = flipImage(getImageIcon("ninja_01"));
-        }else{
+        } else{
             image = getImageIcon("ninja_01");
         }
     }
