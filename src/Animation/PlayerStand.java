@@ -30,6 +30,6 @@ public class PlayerStand extends AnimationInterface{
         }
     }
     public void render(Graphics g2,int x,int y){
-        g2.drawImage(image, x, y, 25, 35, null);
+        g2.drawImage(image, x, y, 20, 28, null);
     }
 }

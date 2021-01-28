@@ -49,9 +49,9 @@ public class KeyListen implements KeyListener{
                 attack.atking = true;
                 if(attack.atking){
                     player.pa.setTime(System.currentTimeMillis());
+                    player.attack.setTime(System.currentTimeMillis());
                     player.setIsAttack(true);
                     attack.setCurrent_time(System.currentTimeMillis());
-                    attack.atking = false;
                 }
                 break;
             default:
@@ -81,6 +81,7 @@ public class KeyListen implements KeyListener{
                 break;
             case KeyEvent.VK_A:
                 player.setIsAttack(false);
+                attack.atking = false;
                 break;
             default:
                 break;

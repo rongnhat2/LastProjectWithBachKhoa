@@ -5,15 +5,16 @@
  */
 package Window;
 
+import Map.Map01;
 import Map.PhysicalMap;
 import Player.Player;
-import Player.Skill.BasicAttack;
 import static Window.KFrame.WINDOW_HEIGHT;
 import static Window.KFrame.WINDOW_WIDTH;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
+import static jdk.nashorn.internal.objects.NativeArray.map;
 
 /**
  *
@@ -47,6 +48,7 @@ public class KPanel extends JPanel{
     }
     public void update(){
         player.update();
+        map.update();
     }
     public void render(){
         g2.setColor(Color.white);
@@ -57,6 +59,7 @@ public class KPanel extends JPanel{
         map.render_decorate(g2);
         player.render(g2);
         map.render_object(g2);
+        map.render_enemy(g2);
         
     }
     public void reload(){

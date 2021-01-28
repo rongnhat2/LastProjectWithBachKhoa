@@ -5,12 +5,14 @@
  */
 package Map;
 
+import Enemy.Enemy1;
 import Window.KPanel;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
@@ -28,6 +30,9 @@ public class PhysicalMap {
     private int maxx =0;
     private int maxy =0;
     public static int map1[][];
+    
+    public static ArrayList<Enemy1> enemy_01 = new ArrayList<Enemy1>();
+    Enemy1 en1,en2,en3,en4,en5;
     Image i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,i11,i12,i13,i14,i15,i16,i17,i18,i19,
             i20,i21,i22,i23,i24,i25,i26;
 
@@ -39,6 +44,12 @@ public class PhysicalMap {
         LoadingMap("src/Map/map2.txt");
         minx = KPanel.PanelWidth - sizewidth * size;
         miny = KPanel.PanelHeight - sizeheight * size;
+        en1 = new Enemy1(15 * 24, 10 * 24, 5 * 24, 0, 1, 100);
+        enemy_01.add(en1);
+        en1.run.setTime(System.currentTimeMillis());
+        en2 = new Enemy1(18 * 24, 12 * 24, 5 * 24, 0, -1, 100);
+        enemy_01.add(en2);
+        en2.run.setTime(System.currentTimeMillis());
     }
     
     // đọc map từ file txt
@@ -64,22 +75,6 @@ public class PhysicalMap {
         }
     }
 
-//    public void render(Graphics g2){
-//        for(int i = 0;i<50;i++){
-//            for(int j = 0; j < 29 ; j++){
-//                if(map1[j][i] == 0){
-//                    g2.setColor(Color.green);
-//                }else if(map1[j][i] == 1){
-//                    g2.setColor(Color.blue);
-//                }else if(map1[j][i] == 99){
-//                    g2.setColor(Color.blue);
-//                }else{
-//                    g2.setColor(Color.red);
-//                }
-//                g2.fillRect(xMap+ i*24, yMap+ j*24, 24, 24);
-//            }
-//        }
-//    }
     
     // in mặt phẳng
     public void render_flat(Graphics g2){
@@ -136,7 +131,7 @@ public class PhysicalMap {
                 }else if(map1[j][i] == 2){
                     g2.drawImage(i2,xMap+ i*24,yMap+ j*24, null);
                 }
-                g2.drawRect(xMap+ i*24,yMap+ j*24, 24, 24);
+//                g2.drawRect(xMap+ i*24,yMap+ j*24, 24, 24);
             }
         }
     }
@@ -146,8 +141,8 @@ public class PhysicalMap {
             for(int j = 0; j < 29 ; j++){
                 if(map1[j][i] == 1){
                     g2.drawImage(i6,xMap+ i*24,yMap+ j*24, null);
-                    g2.setColor(Color.red);
-                    g2.drawRect(xMap+ i*24,yMap+ j*24, 24, 24);
+//                    g2.setColor(Color.red);
+//                    g2.drawRect(xMap+ i*24,yMap+ j*24, 24, 24);
                 }else if(map1[j][i] == 3){
                     g2.drawImage(i14,xMap+ i*24 + 12 - i14.getWidth(null)/2,yMap+ j*24 + 24 - i14.getHeight(null), null);
                 }else if(map1[j][i] == 5){
@@ -167,6 +162,19 @@ public class PhysicalMap {
         }
     }
     
+    public void update(){
+        for(int i = 0; i < enemy_01.size(); i++){
+            enemy_01.get(i).update();
+        }
+    }
+    public void render_enemy(Graphics g2){
+        for(int i = 0; i < enemy_01.size(); i++){
+            // check dead
+            if (enemy_01.get(i).hp > 0) {
+                enemy_01.get(i).render(g2);
+            }
+        }
+    }
     public void setup(){
         i1 = getImageIcon("f00");
         i2 = getImageIcon("f01");
